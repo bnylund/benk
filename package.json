@@ -10,9 +10,11 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "dayjs": "^1.11.8",
     "inter-ui": "^3.19.3",
     "preact": "^10.13.2",
-    "scss-reset": "^1.4.2"
+    "scss-reset": "^1.4.2",
+    "sockette": "^2.0.6"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
@@ -22,7 +24,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "sass": "^1.63.6",
