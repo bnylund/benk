@@ -40,4 +40,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: benjaminnylund/benk:latest,benjaminnylund/benk:${{ github.sha }}
+          tags: benjaminnylund/benk:${{ github.sha }},benjaminnylund/benk:latest
