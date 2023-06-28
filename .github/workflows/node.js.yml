@@ -38,6 +38,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
           push: true
           tags: benjaminnylund/benk:${{ github.sha }},benjaminnylund/benk:latest
