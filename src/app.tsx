@@ -23,8 +23,10 @@ export function App() {
     const socket = createSocket({
       onopen: function () {
         addLine(`Websocket connected`)
-        this.send('set-gpio 16 input')
-        this.send('subscribe 16')
+        setTimeout(() => {
+          this.send('set-gpio 16 input')
+          this.send('subscribe 16')
+        }, 1000)
       },
       onclose: function () {
         addLine(`Websocket disconnected`)
