@@ -7,3 +7,37 @@
   object-fit: cover;
   z-index: -1;
 }
+
+#log {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 400px;
+  height: 200px;
+  padding: 10px;
+  background-color: #111c;
+  color: rgb(53, 211, 53);
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+#reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  button {
+    background-color: rgb(255, 132, 0);
+    font-size: 32px;
+    padding: 50px 100px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #000;
+  }
+}
