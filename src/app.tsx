@@ -11,21 +11,24 @@ export function App() {
   const [sleep, setSleep] = useState(false)
   const [socket] = useState<Sockette>(
     createSocket({
-      onopen: () => {
+      onopen: function () {
         addLine(`Websocket connected`)
+        this.send('set-gpio 16 input')
+        this.send('subscribe 16')
       },
-      onclose: () => {
+      onclose: function () {
         addLine(`Websocket disconnected`)
       },
-      onerror: () => {
+      onerror: function () {
         addLine(`Websocket error`)
       },
-      onmessage: (ev) => {
+      onmessage: function (ev) {
         if (ev.data !== 'pong') addLine(`Received message: "${ev.data}"`)
       },
     }),
   )
   const ref = useRef<HTMLDivElement | null>(null)
+  const [status, setStatus] = useState(false)
 
   const addLine = (line: string) => {
     if (ref.current) {
@@ -51,10 +54,11 @@ export function App() {
       <div id="reset">
         <button
           onClick={() => {
-            socket?.send('execute command')
+            socket?.send(`set-gpio 18 output ${status ? 0 : 1}`)
+            setStatus(!status)
           }}
         >
-          Reset
+          {status ? 'Turn off' : 'Turn on'}
         </button>
       </div>
     </>
