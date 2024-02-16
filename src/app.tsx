@@ -9,17 +9,8 @@ import dayjs from 'dayjs'
 
 export function App() {
   const [sleep, setSleep] = useState(false)
-  const [socket, setSocket] = useState<Sockette | null>(null)
-  const ref = useRef<HTMLDivElement | null>(null)
-
-  const addLine = (line: string) => {
-    if (ref.current) {
-      ref.current.innerHTML += `<p>[${dayjs(Date.now()).format()}] ${line}</p>`
-    }
-  }
-
-  useEffect(() => {
-    const socket = createSocket({
+  const [socket] = useState<Sockette>(
+    createSocket({
       onopen: () => {
         addLine(`Websocket connected`)
       },
@@ -30,15 +21,26 @@ export function App() {
         addLine(`Websocket error`)
       },
       onmessage: (ev) => {
-        addLine(`Received message: "${ev.data}"`)
+        if (ev.data !== 'pong') addLine(`Received message: "${ev.data}"`)
       },
-    })
-    setSocket(socket)
+    }),
+  )
+  const ref = useRef<HTMLDivElement | null>(null)
 
-    return () => {
-      socket.close()
+  const addLine = (line: string) => {
+    if (ref.current) {
+      ref.current.innerHTML += `<p>[${dayjs(Date.now()).format()}] ${line}</p>`
     }
-  }, [ref])
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      socket.send('ping')
+    }, 2500)
+    return () => {
+      clearInterval(interval)
+    }
+  })
 
   return (
     <>
