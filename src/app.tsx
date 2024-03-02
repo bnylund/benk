@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'preact/hooks'
 import { createSocket } from './shared/websocket'
 import Sockette from 'sockette'
 import dayjs from 'dayjs'
+import { Simulator } from './components/simulator'
 
 export function App() {
   const [sleep, setSleep] = useState(false)
@@ -70,6 +71,7 @@ export function App() {
           {status ? 'Turn off' : 'Turn on'}
         </button>
       </div>
+      {import.meta.env.DEV ? <Simulator socket={socket} /> : null}
     </>
   )
 }
